@@ -1,0 +1,5 @@
+{
+  "airport": ["check-in", "boarding pass", "passport", "security"],
+  "restaurant": ["menu", "order", "bill", "waiter"],
+  "interview": ["introduce", "strengths", "experience", "company"]
+}

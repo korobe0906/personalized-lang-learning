@@ -205,3 +205,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+/output/
+__pycache__/
+# 👇 Dành cho editor như VSCode, PyCharm
+.vscode/
+.idea/
+
+# 👇 Nếu bạn dùng Jupyter Notebook sau này
+.ipynb_checkpoints/
+
+# 👇 File hệ điều hành (nếu có)
+.DS_Store
+Thumbs.db
