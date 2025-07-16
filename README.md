@@ -19,20 +19,24 @@ Dự án cho phép người học nhập vào một mục tiêu học cụ thể
 
 ---
 
-## Cấu trúc thư mục
+## System Architecture: 3-Layer Design
 
-personalized-lang-learning/
-├── data/ # Dữ liệu ontology, ví dụ AIM
-├── prompts/ # Template prompt cho GPT
-├── src/ # Source code chính: parser, GPT client
-├── output/ # Kết quả demo đầu ra
-├── run_demo.py # Chạy demo đầu cuối
-├── .env # Chứa API Key 
-├── .gitignore # File để ignore các dữ liệu nhạy cảm
-├── requirements.txt # Danh sách thư viện cần thiết
-├── README.md # Tài liệu mô tả dự án
+### Data Layer
+- `data/ontology_keywords.json`: cấu trúc từ khóa
+- `data/sample_aims.txt`: mục tiêu học
+- `prompts/prompt_template.txt`: khung prompt
+- `output/results.txt`: kết quả sinh
 
----
+### Logic Layer
+- `aim_parser.py`, `retriever.py`, `prompt_builder.py`: từ AIM → prompt
+- `evaluator.py`: đánh giá đầu ra
+- `pre_assessment_chatbot.py`: trò chuyện xác định AIM
+
+### Generation Layer
+- `gpt_client.py`: gọi Groq LLM API để sinh hội thoại
+
+### Entry point
+- `run_demo.py`: chạy pipeline từ AIM đến hội thoại đầu ra
 
 ## Cách chạy demo
 
