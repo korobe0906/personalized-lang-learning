@@ -1,18 +1,25 @@
-from src.aim_parser import load_ontology, parse_aim
-from src.prompt_builder import build_prompt
-from src.gpt_client import get_response
+from src.ontology_loader import OntologyLoader
+from src.vectorstore_builder import build_vectorstore_if_needed
+from src.retriever import get_context_for_aim
+from src.rag_chain import generate_conversation
 
-ontology = load_ontology("data/ontology_keywords.json")
-aim = input("Nhập mục tiêu học (AIM): ")
+owl_path = "data/ontology/checkin.ttl"
+aim = input("Nhập AIM: ").strip()
+aim_name = aim[0].upper() + aim[1:]
 
-topics = parse_aim(aim, ontology)
-print(" Chủ đề liên quan:", topics)
+# Parse ontology để lấy keyword/topic
+loader = OntologyLoader(owl_path)
+keywords = loader.get_keywords_for_aim(aim_name)
+topic = loader.get_topic_for_aim(aim_name)
 
+# Build vectorstore nếu chưa có
+build_vectorstore_if_needed()
 
-prompt = build_prompt(topics[0], ontology[topics[0]], "prompts/prompt_template.txt")
-print(" Prompt gửi GPT:")
-print(prompt)
+# Lấy context từ vectorstore
+retrieved_context = get_context_for_aim(aim_name)
 
-response = get_response(prompt)
-print("\n Kết quả GPT:")
-print(response)
+# Gộp prompt
+context = f"Chủ đề: {topic}. Từ khóa: {', '.join(keywords)}. Nội dung gợi ý: {retrieved_context}"
+
+# Gửi LLM
+print(generate_conversation(context))

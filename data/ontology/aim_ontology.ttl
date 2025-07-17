@@ -1,0 +1,234 @@
+@prefix : <http://example.org/lang-learning#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+:BoardingAIM a :AIM ;
+    rdfs:label "Boarding an Airplane" ;
+    :hasKeyword :boarding_group,
+        :gate,
+        :seat_number ;
+    :hasTopic :Travel ;
+    :preRequisite :CheckInAIM .
+
+:EmergencyHelpAIM a :AIM ;
+    rdfs:label "Emergency Help" ;
+    :hasKeyword :emergency,
+        :help,
+        :lost,
+        :police ;
+    :hasTopic :Travel ;
+    :preRequisite :AskingDirectionAIM .
+
+:PayingAtRestaurantAIM a :AIM ;
+    rdfs:label "Paying at Restaurant" ;
+    :hasKeyword :cash,
+        :credit_card,
+        :split_bill ;
+    :hasTopic :Dining ;
+    :preRequisite :OrderingFoodAIM .
+
+:RoomServiceAIM a :AIM ;
+    rdfs:label "Using Room Service" ;
+    :hasKeyword :cleaning,
+        :extra_towel,
+        :laundry ;
+    :hasTopic :Hotel ;
+    :preRequisite :HotelBookingAIM .
+
+:ShoppingAIM a :AIM ;
+    rdfs:label "Basic Shopping" ;
+    :hasKeyword :discount,
+        :price,
+        :receipt,
+        :try_on ;
+    :hasTopic :Shopping ;
+    :preRequisite :GreetingsAIM .
+
+:TravelAndDiningAIM a [ a owl:Class ;
+            owl:intersectionOf ( :Travel :Dining ) ] ;
+    rdfs:label "Combo Travel and Dining" .
+
+:hasParentTopic a owl:ObjectProperty,
+        owl:TransitiveProperty .
+
+:hasTopic a owl:ObjectProperty .
+
+:preRequisite a owl:ObjectProperty .
+
+:relatedTo a owl:ObjectProperty .
+
+:AskingDirectionAIM a :AIM ;
+    rdfs:label "Asking for Directions" ;
+    :hasKeyword :how_far,
+        :turn_left,
+        :where_is ;
+    :hasTopic :Travel ;
+    :preRequisite :GreetingsAIM .
+
+:CheckInAIM a :AIM ;
+    rdfs:label "Airport Check-In" ;
+    :hasKeyword :boarding_pass,
+        :check_in,
+        :passport,
+        :security ;
+    :hasTopic :Travel ;
+    :preRequisite :GreetingsAIM ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue :passport ;
+            owl:onProperty :hasKeyword ] .
+
+:FoodTopic a :Topic ;
+    rdfs:label "Food" .
+
+:HotelBookingAIM a :AIM ;
+    rdfs:label "Booking a Hotel Room" ;
+    :hasKeyword :check_in,
+        :check_out,
+        :reservation,
+        :room ;
+    :hasTopic :Hotel ;
+    :preRequisite :GreetingsAIM .
+
+:OrderingFoodAIM a :AIM ;
+    rdfs:label "Ordering Food" ;
+    :hasKeyword :bill,
+        :menu,
+        :order,
+        :waiter ;
+    :hasTopic :Dining ;
+    :preRequisite :GreetingsAIM .
+
+:Shopping a :Topic ;
+    rdfs:label "Shopping" ;
+    :hasParentTopic :Dining .
+
+:bill a owl:Class ;
+    rdfs:label "bill" .
+
+:boarding_group a owl:Class ;
+    rdfs:label "boarding_group" .
+
+:boarding_pass a owl:Class ;
+    rdfs:label "boarding_pass" .
+
+:cash a owl:Class ;
+    rdfs:label "cash" .
+
+:check_out a owl:Class ;
+    rdfs:label "check_out" .
+
+:cleaning a owl:Class ;
+    rdfs:label "cleaning" .
+
+:credit_card a owl:Class ;
+    rdfs:label "credit_card" .
+
+:discount a owl:Class ;
+    rdfs:label "discount" .
+
+:emergency a owl:Class ;
+    rdfs:label "emergency" .
+
+:extra_towel a owl:Class ;
+    rdfs:label "extra_towel" .
+
+:gate a owl:Class ;
+    rdfs:label "gate" .
+
+:good_morning a owl:Class ;
+    rdfs:label "good_morning" .
+
+:hasKeyword a owl:ObjectProperty .
+
+:hello a owl:Class ;
+    rdfs:label "hello" .
+
+:help a owl:Class ;
+    rdfs:label "help" .
+
+:how_far a owl:Class ;
+    rdfs:label "how_far" .
+
+:laundry a owl:Class ;
+    rdfs:label "laundry" .
+
+:lost a owl:Class ;
+    rdfs:label "lost" .
+
+:menu a owl:Class ;
+    rdfs:label "menu" .
+
+:nice_to_meet_you a owl:Class ;
+    rdfs:label "nice_to_meet_you" .
+
+:order a owl:Class ;
+    rdfs:label "order" .
+
+:police a owl:Class ;
+    rdfs:label "police" .
+
+:price a owl:Class ;
+    rdfs:label "price" .
+
+:receipt a owl:Class ;
+    rdfs:label "receipt" .
+
+:reservation a owl:Class ;
+    rdfs:label "reservation" .
+
+:room a owl:Class ;
+    rdfs:label "room" .
+
+:seat_number a owl:Class ;
+    rdfs:label "seat_number" .
+
+:security a owl:Class ;
+    rdfs:label "security" .
+
+:split_bill a owl:Class ;
+    rdfs:label "split_bill" .
+
+:try_on a owl:Class ;
+    rdfs:label "try_on" .
+
+:turn_left a owl:Class ;
+    rdfs:label "turn_left" .
+
+:waiter a owl:Class ;
+    rdfs:label "waiter" .
+
+:where_is a owl:Class ;
+    rdfs:label "where_is" .
+
+:Hotel a :Topic ;
+    rdfs:label "Hotel" ;
+    :hasParentTopic :Travel .
+
+:check_in a owl:Class ;
+    rdfs:label "check_in" .
+
+:passport a owl:Class ;
+    rdfs:label "passport" .
+
+:Dining a :Topic ;
+    rdfs:label "Dining" ;
+    owl:equivalentClass :FoodTopic .
+
+:GreetingsAIM a :AIM ;
+    rdfs:label "Greetings" ;
+    :hasKeyword :good_morning,
+        :hello,
+        :nice_to_meet_you ;
+    :hasTopic :Travel .
+
+:Topic a owl:Class .
+
+:Travel a :Topic ;
+    rdfs:label "Travel" .
+
+:AIM a owl:Class .
+
+:ExploreCityAIM a owl:Class ;
+    owl:unionOf ( :ShoppingAIM :AskingDirectionAIM ) ;
+    rdfs:label "Explore City" .
