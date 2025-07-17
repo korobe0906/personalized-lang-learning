@@ -232,3 +232,12 @@
 :ExploreCityAIM a owl:Class ;
     owl:unionOf ( :ShoppingAIM :AskingDirectionAIM ) ;
     rdfs:label "Explore City" .
+
+:Dining a :Topic ;
+    rdfs:label "Dining" ;
+    :hasParentTopic :Travel ;
+    owl:equivalentClass :FoodTopic .
+
+:FoodTopic a :Topic ;
+    rdfs:label "Food" ;
+    :hasParentTopic :Travel .

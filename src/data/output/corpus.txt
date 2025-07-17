@@ -1,0 +1,87 @@
+AIM: Boarding an Airplane
+Topic: Travel
+Keyword: boarding_group
+Keyword: gate
+Keyword: seat_number
+Prerequisite: Airport Check-In
+Integrated Topic: Travel
+
+AIM: Emergency Help
+Topic: Travel
+Keyword: emergency
+Keyword: help
+Keyword: lost
+Keyword: police
+Prerequisite: Asking for Directions
+Integrated Topic: Travel
+
+AIM: Paying at Restaurant
+Topic: Dining
+Keyword: cash
+Keyword: credit_card
+Keyword: split_bill
+Prerequisite: Ordering Food
+Integrated Topic: Dining
+
+AIM: Using Room Service
+Topic: Hotel
+Keyword: cleaning
+Keyword: extra_towel
+Keyword: laundry
+Prerequisite: Booking a Hotel Room
+Integrated Topic: Hotel
+
+AIM: Basic Shopping
+Topic: Shopping
+Keyword: discount
+Keyword: price
+Keyword: receipt
+Keyword: try_on
+Prerequisite: Greetings
+Integrated Topic: Shopping
+
+AIM: Combo Travel and Dining
+
+AIM: Asking for Directions
+Topic: Travel
+Keyword: how_far
+Keyword: turn_left
+Keyword: where_is
+Prerequisite: Greetings
+Integrated Topic: Travel
+
+AIM: Airport Check-In
+Topic: Travel
+Keyword: boarding_pass
+Keyword: check_in
+Keyword: passport
+Keyword: security
+Prerequisite: Greetings
+Integrated Topic: Travel
+
+AIM: Booking a Hotel Room
+Topic: Hotel
+Keyword: check_in
+Keyword: check_out
+Keyword: reservation
+Keyword: room
+Prerequisite: Greetings
+Integrated Topic: Hotel
+
+AIM: Ordering Food
+Topic: Dining
+Keyword: bill
+Keyword: menu
+Keyword: order
+Keyword: waiter
+Prerequisite: Greetings
+Integrated Topic: Dining
+
+AIM: Greetings
+Topic: Travel
+Keyword: good_morning
+Keyword: hello
+Keyword: nice_to_meet_you
+Integrated Topic: Travel
+
+AIM: Explore City

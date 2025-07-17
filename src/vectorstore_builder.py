@@ -1,36 +1,36 @@
+# vectorstore_builder.py
 import os
-from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import CharacterTextSplitter
 
+from src.ontology_to_corpus import extract_triples_from_ontology
 
-def build_vectorstore_if_needed(corpus_path="data/output/corpus.txt", save_path="data/output/faiss_index"):
-    # In debug để kiểm tra đường dẫn
+def build_vectorstore_from_ontology(
+    ontology_path: str = "data/ontology/aim_ontology.ttl",
+    corpus_path: str = "data/output/corpus.txt",
+    index_path: str = "data/output/faiss_index"
+):
     print(f"Đang kiểm tra file corpus tại: {corpus_path}")
 
-    # Nếu file không tồn tại thì báo lỗi rõ ràng
-    if not os.path.exists(corpus_path):
-        raise FileNotFoundError(f"Không tìm thấy file corpus: {corpus_path}")
+    # Bước 1: Chuyển ontology thành corpus
+    extract_triples_from_ontology(ontology_path, corpus_path)
 
-    #Nếu vectorstore đã có rồi thì load
-    if os.path.exists(save_path + ".faiss"):
-        print("Đã tồn tại FAISS index, đang load...")
-        return FAISS.load_local(save_path, HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2"))
+    # Bước 2: Load corpus thành documents
+    loader = TextLoader(corpus_path, encoding="utf-8")
+    docs = loader.load()
+    splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    split_docs = splitter.split_documents(docs)
 
-    # Load dữ liệu
-    loader = TextLoader(corpus_path, encoding="utf-8")  # ✅ thêm encoding
-    documents = loader.load()
-
-    # Tách đoạn
-    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-    docs = splitter.split_documents(documents)
-
-    # Tạo vectorstore
+    # Bước 3: Embedding + FAISS
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    vectordb = FAISS.from_documents(docs, embeddings)
+    vectorstore = FAISS.from_documents(split_docs, embeddings)
 
-    # Lưu lại
-    vectordb.save_local(save_path)
-    print(f"Đã tạo và lưu FAISS vectorstore tại {save_path}")
-    return vectordb
+    # Bước 4: Lưu index
+    os.makedirs(index_path, exist_ok=True)
+    vectorstore.save_local(index_path)
+    print(f"Đã tạo và lưu FAISS vectorstore tại {index_path}")
+
+if __name__ == "__main__":
+    build_vectorstore_from_ontology()
