@@ -55,7 +55,7 @@ def extract_triples_from_ontology(ttl_path: str, output_path: str):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(content_lines))
-    print(f"[✔] Corpus saved to {output_path}")
+    print(f"Corpus saved to {output_path}")
 
 # Example usage:
 if __name__ == "__main__":

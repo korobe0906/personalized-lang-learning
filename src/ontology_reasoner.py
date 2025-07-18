@@ -42,14 +42,25 @@ class OntologyReasoner:
             topics.add((str(s).split("#")[-1], str(o).split("#")[-1]))
         return list(topics)
 
-    def summarize_aim(self, aim_id):
+    def summarize_aim(self, aim_id, include_reasoning=False):
         aim_uri = self.ns[aim_id]
-        return {
+
+        if include_reasoning:
+            summary = {
+                "equivalent_aims": self.get_equivalent_aims(aim_id),
+                "related_aims": self.get_related(aim_id),
+            }
+        else:
+            summary = {
+                "equivalent_aims": [],
+                "related_aims": [],
+            }
+
+        summary.update({
             "aim": aim_id,
             "keywords": self.get_keywords(aim_uri),
             "topic": self.get_topic(aim_uri),
             "prerequisites": self.get_prerequisites(aim_uri),
-            "related": self.get_related(aim_uri),
-            "equivalents": self.get_equivalent_aims(aim_uri),
-            "subclasses": self.get_subclasses(aim_uri),
-        }
+        })
+
+        return summary

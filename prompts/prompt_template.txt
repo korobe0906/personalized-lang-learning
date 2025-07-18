@@ -1,3 +1,0 @@
-Viết đoạn hội thoại tiếng Anh cấp độ sơ cấp về tình huống: {{topic}}.
-Dùng các từ khóa sau: {{keywords}}.
-Đảm bảo đơn giản, thực tế, không quá 5 câu.

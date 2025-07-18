@@ -4,15 +4,15 @@ from dotenv import load_dotenv
 
 load_dotenv()  # Load biến môi trường từ file .env
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY không được tìm thấy trong file .env!")
+GROK_API_KEY = os.getenv("GROK_API_KEY")
+if not GROK_API_KEY:
+    raise ValueError("GROK_API_KEY không được tìm thấy trong file .env!")
 
-GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROK_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
-def call_groq_llm(prompt: str) -> str:
+def call_grok_llm(prompt: str) -> str:
     headers = {
-        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Authorization": f"Bearer {GROK_API_KEY}",
         "Content-Type": "application/json"
     }
 
@@ -24,7 +24,7 @@ def call_groq_llm(prompt: str) -> str:
         "temperature": 0.7,
     }
 
-    response = requests.post(GROQ_API_URL, headers=headers, json=data)
+    response = requests.post(GROK_API_URL, headers=headers, json=data)
     response.raise_for_status()  # Raise lỗi nếu bị 401, 403, 500...
 
     result = response.json()

@@ -61,7 +61,7 @@ def get_context_for_aim(aim_name: str, use_reasoning: bool = True) -> str:
         print(" Reasoning bật - AIM liên quan:", [str(uri).split("#")[-1] for uri in related_aims])
     else:
         related_aims = [aim_uri]
-        print("⚡ Reasoning tắt - chỉ dùng AIM hiện tại.")
+        print(" Reasoning tắt - chỉ dùng AIM hiện tại.")
 
     keywords = get_keywords_for_aims(g, ns, related_aims)
     if not keywords:
